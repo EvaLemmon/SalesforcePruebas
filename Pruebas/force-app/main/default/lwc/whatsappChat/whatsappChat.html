@@ -1,0 +1,41 @@
+<!--
+   - Created by eva.lopez on 12/04/2023.
+   -->
+<!-- Whatsapp Chat -->
+<template>
+    <lightning-card>
+        <section role="log" class="slds-chat">
+            <ul class="slds-chat-list">
+
+                <div key={chatlist.From__c} class="slds-m-around_medium">
+                    <template for:each={chatlist} for:item='chatmsg' for:index='index'>
+                        <li if:true={chatmsg.Recieved__c} data-index={index} key={chatmsg.From__c} class="slds-chat-listitem slds-chat-listitem_inbound">
+                            <div class="slds-chat-message">
+                                <div class="slds-chat-message__body">
+                                    <div class="slds-chat-message__text slds-chat-message__text_inbound">
+                                        {chatmsg.Body__c}
+                                    </div>
+                                    <div class="slds-chat-message__meta" aria-label="">dijo {chatmsg.Name} ({chatmsg.From__c}) a las {chatmsg.CreatedDate}</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li if:false={chatmsg.Recieved__c} data-index={index} key={chatmsg.From__c} class="slds-chat-listitem slds-chat-listitem_outbound">
+                            <div class="slds-chat-message">
+                                <div class="slds-chat-message__body">
+                                    <div class="slds-chat-message__text slds-chat-message__text_outbound">
+                                        {chatmsg.Body__c}
+                                    </div>
+                                    <div class="slds-chat-message__meta" aria-label="">Tú a las {chatmsg.CreatedDate}</div>
+                                </div>
+                            </div>
+                        </li>
+                    </template>
+                </div>
+            </ul>
+        </section>
+        <div>
+            <lightning-input type="text" name="texto" ></lightning-input>
+            <lightning-button label="Enviar" onclick={mandarMensaje}></lightning-button>
+        </div>
+    </lightning-card>
+</template>

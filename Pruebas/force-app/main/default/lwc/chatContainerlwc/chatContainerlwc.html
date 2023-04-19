@@ -1,0 +1,20 @@
+<!--
+ - Created by eva.lopez on 13/04/2023.
+ -->
+
+<!-- Chat Containerlwc -->
+<template>
+    <template lwc:if={contacts.data}>
+        <template for:each={contacts.data} for:item="contact" for:index="index">
+            <lightning-card key={contact.Id} >
+                <h1 slot="title" onclick={expandirFila}>
+                    <lightning-icon icon-name="utility:connected_apps"></lightning-icon>Chat de {contact.Name}
+                </h1>
+                <div lwc:if={chatOpened} key={contact.Id} class="slds-m-around_medium" id="expandir">
+                    <c-whatsapp-chat key={contact.Id} record-id={contact.Id}></c-whatsapp-chat>
+                </div>
+            </lightning-card>
+            <br key={contact.Id}>
+        </template>
+    </template>
+</template>
